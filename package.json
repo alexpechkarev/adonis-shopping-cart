@@ -1,0 +1,64 @@
+{
+    "name": "adonis-shopping-cart",
+    "version": "1.0.0",
+    "description": "Adonis Shopping Cart",
+    "main": "./build/providers/CartProvider.js",
+    "files": [
+        "build/providers",
+        "build/templates",
+        "build/src",
+        "build/adonis-typings"
+    ],
+    "scripts": {
+        "lint": "eslint . --ext=.ts",
+        "pretest": "npm run lint",
+        "test": "node japaFile.js",
+        "clean": "rm -rf build",
+        "compile": "npm run lint && npm run clean && tsc && npm run copy:files",
+        "copy:files": "copyfiles \"adonis-typings/*\" \"templates/*.txt\" \"package.json\" \"README.md\" build",
+        "build": "npm run compile",
+        "prepublishOnly": "npm run build"
+    },
+    "typings": "./build/adonis-typings/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alexpechkarev/adonis-shopping-cart.git"
+    },
+    "keywords": [
+        "adonisjs",
+        "adonis-shopping-cart",
+        "adonis-shopping-basket"
+    ],
+    "author": "Alexander Pechkarev",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/alexpechkarev/adonis-shopping-cart/issues"
+    },
+    "homepage": "https://github.com/alexpechkarev/adonis-shopping-cart#readme",
+    "devDependencies": {
+        "@adonisjs/core": "^5.1.6",
+        "@adonisjs/mrm-preset": "^3.0.0",
+        "@types/node": "^15.0.2",
+        "@types/node-gcm": "^1.0.0",
+        "copyfiles": "^2.4.1",
+        "eslint": "^7.25.0",
+        "eslint-plugin-adonis": "^1.3.1",
+        "japa": "^3.1.1",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.4"
+    },
+    "adonisjs": {
+        "templates": {
+            "config": [
+                "cart.txt"
+            ]
+        },
+        "env": {
+            "vat": ""
+        },
+        "types": "adonis-shopping-cart",
+        "providers": [
+            "adonis-shopping-cart"
+        ]
+    }
+}
