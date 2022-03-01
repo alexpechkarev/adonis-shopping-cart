@@ -1,7 +1,10 @@
-import CartContract from '@ioc:Adonis/Addons/Cart';
+import { CartContract } from '@ioc:Adonis/Addons/Cart';
 import { CartItem } from '@ioc:Adonis/Addons/Cart';
 /**
  * Cart Class
+ *
+ * @class Cart
+ * @constructor
  */
 export default class Cart implements CartContract {
     protected session: any;

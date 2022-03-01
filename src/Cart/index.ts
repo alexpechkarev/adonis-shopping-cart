@@ -1,22 +1,15 @@
-import CartContract from '@ioc:Adonis/Addons/Cart'
+import { CartContract } from '@ioc:Adonis/Addons/Cart'
 import { CartItem } from '@ioc:Adonis/Addons/Cart'
 import createHmac from 'crypto'
 
 /**
  * Cart Class
+ * 
+ * @class Cart
+ * @constructor
  */
 export default class Cart implements CartContract {
-  // protected id: number
-  // protected name: string
-  // protected price: number
-  // protected priceFormat: string
-  // protected quantity: number
-  // protected attributes: [key: string]
-  // [key: string]: any
-
   constructor (protected session: any, protected cartConfig: any) {
-    //console.log(this.cartConfig)
-    //console.log(this.session.forget('cart'))
     if (typeof this.session.get('cart') === 'undefined') {
       this.initCart()
     }

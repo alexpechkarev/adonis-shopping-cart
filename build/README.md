@@ -1,5 +1,5 @@
-# adonisjs-shopping-cart
-Adonis JS Shopping Cart
+# adonis-shopping-cart
+Adonis Shopping Cart
 
 npm i adonis-shopping-cart
 

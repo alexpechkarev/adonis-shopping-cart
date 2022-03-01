@@ -16,7 +16,7 @@ declare module '@ioc:Adonis/Addons/Cart' {
     attributes: [key: string];
     [key: string]: any;
   }
-  export default interface CartContract {
+  export interface CartContract {
     getRowId(attributes: object): string;
 
     /**
@@ -42,5 +42,18 @@ declare module '@ioc:Adonis/Addons/Cart' {
      * Get Cart Items Content
      */
     getContent(): object;
+    getSubtotal():string;
+    getSubtotalNumber():number;
+    getShiping(): string;
+    getShipingNumber():number;
+    getVat():string;
+    getVatNumber():number;
+    getTotal():string;
+    getTotalNumber():number;
+    getTotalQuantity():number;
+    removeByRowId(rowId:string):void;
   }
+
+  const Cart: CartContract
+  export default Cart
 }

@@ -6,20 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = __importDefault(require("crypto"));
 /**
  * Cart Class
+ *
+ * @class Cart
+ * @constructor
  */
 class Cart {
-    // protected id: number
-    // protected name: string
-    // protected price: number
-    // protected priceFormat: string
-    // protected quantity: number
-    // protected attributes: [key: string]
-    // [key: string]: any
     constructor(session, cartConfig) {
         this.session = session;
         this.cartConfig = cartConfig;
-        //console.log(this.cartConfig)
-        //console.log(this.session.forget('cart'))
         if (typeof this.session.get('cart') === 'undefined') {
             this.initCart();
         }
