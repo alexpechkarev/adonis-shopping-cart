@@ -1,8 +1,6 @@
 # Adonis Shopping Cart
 
-[![npm-image]][npm-url] [![license-image]][license-url] [![typescript-image]][typescript-url]
-
-This is simple Shopping Cart functionality for AdonisJS v5
+Basic Shopping Cart functionality for AdonisJS v5
 
 ## Requirements
 
