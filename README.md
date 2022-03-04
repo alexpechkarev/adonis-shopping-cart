@@ -11,15 +11,33 @@ The Cart is using `@adonisjs/session` to store the data, please ensure you have 
 ````bash
 # npm
 npm i adonis-shopping-cart
-node ace configure adonis-shopping-cart
-
-- Add a variables to `.env` file of project.
-```txt
-...
-vat=20
 ````
 
-- Set currency format options in `config/cart.ts`.
+Register and configure package with AdonisJS
+
+````bash
+# npm
+node ace configure adonis-shopping-cart
+````
+
+
+Add a variables to `.env` file of project and set the VAT value, default is 20%.
+
+```bash
+
+CAR_VAT=20
+````
+
+Number format Locale and Options can be specified in `config/cart.ts`
+
+```bash
+// default values
+  format:{
+    locale: 'en-GB',
+    options: { style: 'currency', currency: 'GBP' },
+  },
+```
+
 
 ## How to use
 
@@ -98,6 +116,7 @@ Cart.getTotalQuantity() // 1
 
 Cart.getContent()
 
+// rowId = tfTZAhxWFZCB8TwUo7lnnAkSOgt6iV6fUaPaXdEOVu4
 // {
 //     "tfTZAhxWFZCB8TwUo7lnnAkSOgt6iV6fUaPaXdEOVu4=":{
 //         "id":1,
