@@ -19,7 +19,7 @@ Register and configure package with AdonisJS
 # npm
 node ace configure adonis-shopping-cart
 ````
-![](adonis-shopping-cart.mp4)
+![Adinis Shopping Cart](adonis-shopping-cart.gif)
 
 Add a variables to `.env` file of project and set the VAT value, default is 20%.
 Assume that the VAT is already included in the item price.
