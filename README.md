@@ -21,7 +21,9 @@ node ace configure adonis-shopping-cart
 ````
 ![Adinis Shopping Cart](adonis-shopping-cart.gif)
 
-Add a variables to `.env` file of project and set the VAT value, default is 20%.
+
+
+Update variable value in `.env` file of your project, the default `CART_VAT` is 20%.
 Assume that the VAT is already included in the item price.
 Example: 
 Item price: £100.00
