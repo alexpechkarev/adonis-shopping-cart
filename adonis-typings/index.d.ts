@@ -13,7 +13,9 @@ declare module '@ioc:Adonis/Addons/Cart' {
     price: number;
     priceFormat: string;
     quantity: number;
-    attributes: [key: string];
+    attributes: {
+      [key:any]
+    };
     [key: string]: any;
   }
   export interface CartContract {

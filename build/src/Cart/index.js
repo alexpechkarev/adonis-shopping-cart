@@ -46,21 +46,34 @@ class Cart {
     getTotalQuantity() {
         const items = this.getContent();
         return Object.keys(items).reduce((previous, key) => {
-            return previous + parseInt(items[key].quantity);
+            if (typeof items[key].quantity !== 'undefined') {
+                return previous + parseInt(items[key].quantity);
+            }
+            return previous + 0;
         }, 0);
     }
     /**
-     * Get Cart Sub total as number
+     * Get Cart Sub total as number less VAT
      * @returns
      */
     getSubtotalNumber() {
         const items = this.getContent();
-        return Object.keys(items).reduce((previous, key) => {
-            return previous + parseInt(items[key].quantity) * parseFloat(items[key].price);
+        const subTotal = Object.keys(items).reduce((previous, key) => {
+            if (typeof items[key].quantity !== 'undefined') {
+                return previous + parseInt(items[key].quantity) * parseFloat(items[key].price);
+            }
+            return previous + 0;
         }, 0);
+        if (subTotal === 0) {
+            return 0;
+        }
+        if (parseInt(this.cartConfig.CART_VAT) > 0) {
+            return subTotal - (subTotal * (parseInt(this.cartConfig.CART_VAT) / 100));
+        }
+        return subTotal;
     }
     /**
-     * Get Cart Sub total as formated curency string
+     * Get Cart Sub total as formated curency string less VAT
      * @returns
      */
     getSubtotal() {
@@ -71,7 +84,20 @@ class Cart {
      * @returns
      */
     getVatNumber() {
-        return this.getSubtotalNumber() * (parseInt(this.cartConfig.vat) / 100);
+        const items = this.getContent();
+        const subTotal = Object.keys(items).reduce((previous, key) => {
+            if (typeof items[key].quantity !== 'undefined') {
+                return previous + parseInt(items[key].quantity) * parseFloat(items[key].price);
+            }
+            return previous + 0;
+        }, 0);
+        if (subTotal === 0) {
+            return 0;
+        }
+        if (parseInt(this.cartConfig.CART_VAT) > 0) {
+            return (subTotal * (parseInt(this.cartConfig.CART_VAT) / 100));
+        }
+        return 0;
     }
     /**
      * Get VAT as formated currency
@@ -79,6 +105,13 @@ class Cart {
      */
     getVat() {
         return this.formatCurrency(this.getVatNumber());
+    }
+    /**
+     * Set Cart shipping amount as number
+     * @param shipping
+     */
+    setShippingAmmount(shipping) {
+        this.session.put('cart.shippingAmount', shipping);
     }
     /**
      * Get Cart Shipping Amount as number
@@ -137,12 +170,12 @@ class Cart {
         //console.log(this.has(id))
         if (this.has(rowId)) {
             // update
-            console.log('update item');
+            //console.log('update item')
             this.update(rowId, this.buildItem(data));
         }
         else {
             // add row
-            console.log('adding row');
+            //console.log('adding row')
             this.session.put(`cart.items.${rowId}`, this.buildItem(data));
         }
     }
@@ -168,21 +201,25 @@ class Cart {
      * @param data
      */
     update(rowId, data) {
-        let item = this.session.get(`cart.items.${rowId}`, {});
+        let currItem = Object.assign({}, this.session.get(`cart.items.${rowId}`, {}));
         this.session.forget(`cart.items.${rowId}`);
         for (let [key, value] of Object.entries(data)) {
             //console.log(key, value)
             //console.log('item - ', item[key])
-            if (item.hasOwnProperty(key)) {
+            if (currItem.hasOwnProperty(key)) {
                 if (key === 'quantity') {
-                    item[key] = parseInt(value);
+                    currItem[key] = parseInt(value);
+                }
+                else if (key === 'price') {
+                    currItem[key] = parseInt(value);
+                    currItem['priceFormat'] = this.formatCurrency(value);
                 }
                 else {
-                    item[key] = value;
+                    currItem[key] = value;
                 }
             }
         }
-        this.session.put(`cart.items.${rowId}`, item);
+        this.session.put(`cart.items.${rowId}`, currItem);
     }
     /**
      * Has Cart Item for given id, match the attributes object
@@ -198,10 +235,35 @@ class Cart {
     }
     /**
      * Get Cart Content
+     *
+     * Cart items are sorted by the rowId
+     *
      * @returns
      */
     getContent() {
-        return this.session.get('cart.items');
+        let items = this.session.get('cart.items');
+        //console.log(items)
+        return Object.entries(items).sort((a, b) => {
+            if (b[0] > a[0]) {
+                return 1;
+            }
+            else if (b[0] < a[0]) {
+                return -1;
+            }
+            else {
+                if (a[1] > b[1]) {
+                    return 1;
+                }
+                else if (a[1] < b[1]) {
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        }).reduce((previousValue, currentValue) => {
+            return ({ ...previousValue, [currentValue.shift()]: currentValue.shift() });
+        }, {});
     }
     /**
      * Clear Cart

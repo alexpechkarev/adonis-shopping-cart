@@ -26,12 +26,12 @@ export default class Cart implements CartContract {
      */
     getTotalQuantity(): number;
     /**
-     * Get Cart Sub total as number
+     * Get Cart Sub total as number less VAT
      * @returns
      */
     getSubtotalNumber(): number;
     /**
-     * Get Cart Sub total as formated curency string
+     * Get Cart Sub total as formated curency string less VAT
      * @returns
      */
     getSubtotal(): string;
@@ -45,6 +45,11 @@ export default class Cart implements CartContract {
      * @returns
      */
     getVat(): string;
+    /**
+     * Set Cart shipping amount as number
+     * @param shipping
+     */
+    setShippingAmmount(shipping: number): void;
     /**
      * Get Cart Shipping Amount as number
      * Subtotal + VAT
@@ -112,6 +117,9 @@ export default class Cart implements CartContract {
     has(rowId: string): boolean;
     /**
      * Get Cart Content
+     *
+     * Cart items are sorted by the rowId
+     *
      * @returns
      */
     getContent(): object;
@@ -130,6 +138,6 @@ export default class Cart implements CartContract {
         priceFormat: string;
         name: string;
         quantity: number;
-        attributes: [key: string];
+        attributes: {};
     };
 }

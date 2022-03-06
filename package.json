@@ -10,7 +10,7 @@
         "build/adonis-typings"
     ],
     "scripts": {
-        "lint": "eslint . --ext=.ts",
+        "lint": "eslint . --ext=.ts --fix",
         "pretest": "npm run lint",
         "test": "node japaFile.js",
         "clean": "rm -rf build",
@@ -60,5 +60,8 @@
         "providers": [
             "adonis-shopping-cart"
         ]
+    },
+    "dependencies": {
+        "node-persist": "^3.1.0"
     }
 }

@@ -11,7 +11,7 @@ const CartConfig: CartConfig = {
   | The Cart VAT Amount
   |
   */
-  vat: Env.get('CAR_VAT', 20),
+  CAR_VAT: Env.get('CAR_VAT', 20),
 
   /*
   |--------------------------------------------------------------------------
