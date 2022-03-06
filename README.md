@@ -209,5 +209,6 @@ export default class CartController {
 ### Test
 
 ```js
+npm run clean
 npm run test
 ```
