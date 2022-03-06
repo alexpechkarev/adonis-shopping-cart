@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const japa_1 = __importDefault(require("japa"));
 const Cart_1 = __importDefault(require("../src/Cart"));
 const MapStorage_1 = __importDefault(require("../src/Cart/MapStorage"));
-//import LocalStorage from '../src/Cart/LocalStorage'
 const config = {
     CART_VAT: 20,
     format: {
@@ -15,7 +14,6 @@ const config = {
     },
 };
 const session = new MapStorage_1.default(new Map());
-//const session = new LocalStorage(config)
 const cart = new Cart_1.default(session, config);
 let item = {
     id: 123,
