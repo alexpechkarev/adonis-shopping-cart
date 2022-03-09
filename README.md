@@ -125,7 +125,7 @@ Cart.removeByRowId(rowId);
 
 ```
 
-### Gettting Cart content
+### Getting Cart content
 
 ```js
 
