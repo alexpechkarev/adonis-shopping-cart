@@ -19,7 +19,7 @@ Register and configure package with AdonisJS
 # npm
 node ace configure adonis-shopping-cart
 ````
-![Adinis Shopping Cart](adonis-shopping-cart.gif)
+![Adinis Shopping Cart](../adonis-shopping-cart.gif)
 
 
 
